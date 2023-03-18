@@ -3,7 +3,6 @@
     $editedISBN = filter_input(INPUT_GET,'isbn');
     if(isset($editedISBN)){
         $book = fetchOneBook($editedISBN);
-        
     }
     $bookAwal = fetchJoinFromDb2();
     $updatePressed = filter_input(INPUT_POST,'btnUpdate');
@@ -33,6 +32,36 @@
             }
         }
     }
+
+    $changePressed = filter_input(INPUT_POST,'coverUpload');
+    if(isset($changePressed)){
+        $fileName = filter_input(INPUT_GET,'isbn');
+        $targetDir = 'uploads/';
+        $fileExtension = pathinfo($_FILES['txtFile']['name'],PATHINFO_EXTENSION);
+        $fileNameExtension=$fileName.'.'.$fileExtension;
+        $fileUploadPath = $targetDir.$fileName.'.'.$fileExtension;
+        if($_FILES['txtFile']['size']>1024*8192){
+            echo '<div>Uploaded file exceed 8MB</div>';
+        }
+        else{
+            move_uploaded_file($_FILES['txtFile']['tmp_name'],$fileUploadPath);
+            $results = updateCoverToDb($editedISBN,$fileNameExtension);
+            if($results){
+                header('location:index.php?menu=book');
+            }else{
+                echo '
+                            <div>
+                                Failed to add data
+                            </div>
+                        ';
+            }
+        }
+    }
+
+
+
+
+
 ?>
 
 <div class="container" style="height:auto">
@@ -73,7 +102,7 @@
                 <?php
                     $result = fetchGenreFromDb();
                     foreach($result as $genre ){
-                        echo '<option value="'. $genre['id'].'">'.$genre['name'].'</option>';
+                        echo '<option value="'. $genre['id'].'"'. (($book["genre_id"] ==  $genre["id"])?'selected="selected"':"").'>'.$genre['name'].'</option>';
                     }
                     ?>
                 </select>
@@ -81,6 +110,31 @@
             <button type="submit" class="btn btn-primary" name="btnUpdate">Update Data</button>
             
             </form>
+            <div class="container" style="height:100vh">
+                <div class="row d-flex text-start justify-content-center my-3">
+                    <div class="col-md-6 text-center">
+                        <h1>Change Cover</h1>
+                        <?php
+                        if ($book['cover'] != '') {
+                            echo '<img class="rounded-3" src="uploads/' . $book['cover'] . '" style="width:100%;height:auto;max-width:500px;max-height:500px; text-align:center;">';
+                        }
+                        else{
+                            echo '<img class="rounded-3" src="uploads/default.jpg" style="width:100%;height:auto;max-width:500px;max-height:500px; text-align:center;">';
+                        }
+                        ?>
+                        <form method="post" enctype="multipart/form-data">
+
+                            <div class="mb-3">
+                                <input type="file" class="form-control my-3" name="txtFile" accept="image/jpg">
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100 text-warning" name="coverUpload">Change Cover</button>
+
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
         
        

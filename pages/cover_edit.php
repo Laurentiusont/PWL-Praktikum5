@@ -8,13 +8,14 @@
             $fileName = filter_input(INPUT_GET,'isbna');
             $targetDir = 'uploads/';
             $fileExtension = pathinfo($_FILES['txtFile']['name'],PATHINFO_EXTENSION);
+            $fileNameExtension=$fileName.'.'.$fileExtension;
             $fileUploadPath = $targetDir.$fileName.'.'.$fileExtension;
             if($_FILES['txtFile']['size']>1024*8192){
                 echo '<div>Uploaded file exceed 8MB</div>';
             }
             else{
                 move_uploaded_file($_FILES['txtFile']['tmp_name'],$fileUploadPath);
-                $results = updateCoverToDb($isbn,$isbn);
+                $results = updateCoverToDb($isbn,$fileNameExtension);
                 if($results){
                     header('location:index.php?menu=book');
                 }else{
@@ -33,8 +34,13 @@
    <div class="row d-flex text-start justify-content-center my-3">
         <div class="col-md-6 text-center">
             <h1>Change Cover</h1>
-            <?php 
-                echo '<img class="rounded-3" src="uploads/'. $book['cover'] . '.jpg" style="width:100%;height:auto;max-width:500px;max-height:500px; text-align:center;">';
+            <?php
+            if ($book['cover'] != '') {
+                echo '<img class="rounded-3" src="uploads/' . $book['cover'] . '" style="width:100%;height:auto;max-width:500px;max-height:500px; text-align:center;">';
+            }
+            else{
+                echo '<img class="rounded-3" src="uploads/default.jpg" style="width:100%;height:auto;max-width:500px;max-height:500px; text-align:center;">';
+            }
             ?>
             <form method="post" enctype="multipart/form-data">
 

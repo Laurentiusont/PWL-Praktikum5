@@ -106,8 +106,8 @@
         $link -> beginTransaction();
         $query = 'UPDATE book SET cover= ? WHERE ISBN = ?';
         $stmt = $link->prepare($query);
-        $stmt->bindParam(1,$isbn,PDO::PARAM_STR);
-        $stmt->bindParam(2,$cover,PDO::PARAM_STR);
+        $stmt->bindParam(1,$cover,PDO::PARAM_STR);
+        $stmt->bindParam(2,$isbn,PDO::PARAM_STR);
         if($stmt->execute()){
             $link -> commit();
             $result = 1;
