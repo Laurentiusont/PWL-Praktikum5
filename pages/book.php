@@ -48,7 +48,7 @@ if(isset($submitPressed)){
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-12">    
             <div class="table-responsive">        
-                <table class="table table-hover  table-striped table-bordered border-danger table-sm" id="book">
+                <table class="table table-hover  table-bordered border-danger table-sm" id="book">
                     <thead>
                     <tr>
                         <th class=" text-center" scope="col">ISBN</th>
@@ -58,7 +58,7 @@ if(isset($submitPressed)){
                         <th class=" text-center" scope="col">Publisher</th>
                         <th class=" text-center" scope="col">Publish Year</th>
                         <th class=" text-center" scope="col">Nama Genre</th>
-                        <th class=" text-center" scope="col">Action</th>
+                        <th class=" text-center w-50" scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>

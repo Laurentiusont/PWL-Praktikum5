@@ -51,9 +51,9 @@ if(isset($submitPressed)){
 
 <div class="container text-center mt-4" style="height:auto">
 <div class="row d-flex text-start justify-content-center my-3 align-items-center">
-<div class="col-md-10">
+<div class="col-md-8">
             <div class="table-responsive">        
-                <table class="table table-hover  table-striped table-bordered border-danger table-sm" id="genre">            
+                <table class="table table-hover   table-bordered border-danger table-sm" id="genre">            
                     <thead>
                         <tr>
                             <th class=" text-center" scope="col">ID</th>
@@ -61,16 +61,16 @@ if(isset($submitPressed)){
                             <th class=" text-center" scope="col">ACTION</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         <?php
                         $results = fetchGenreFromDb();
                         foreach($results as $genre ){
                             echo '<tr>';
-                            echo '<td>'. $genre['id'] . '</td>';
-                            echo '<td>'. $genre['name'] . '</td>';
-                            echo '<td>
-                                <button type="button" class="btn btn-warning" onclick="editGenre('.$genre['id'].')"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button type="button" class="btn btn-danger" onclick="deleteGenre('.$genre['id'].')"><i class="fa-solid fa-trash"></i></button>
+                            echo '<td class="darkmode text-center">'. $genre['id'] . '</td>';
+                            echo '<td class="darkmode text-center">'. $genre['name'] . '</td>';
+                            echo '<td class="text-center ">
+                                <button type="button" class="btn my-1 btn-warning" onclick="editGenre('.$genre['id'].')"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button type="button" class="btn my-1 btn-danger" onclick="deleteGenre('.$genre['id'].')"><i class="fa-solid fa-trash"></i></button>
                             </td>';
                             echo '</tr>';
                         }
@@ -80,16 +80,34 @@ if(isset($submitPressed)){
             </div>
         </div>
         
-<div class="col-md-2">
-<h1 class="text-center">Tambah Data</h1>
-        <form method="post">
-            <div class="mb-3">
-                <label for="namaGenre" class="form-label">Genre Name</label>
-                <input type="text" class="form-control" name="textName" id="namaGenre" maxlength="45" required autofocus placeholder="Genre Name">
-            </div>
-            <button type="submit" class="btn btn-primary w-100" name="btnSave">Save Data</button>
-        </form>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-5 w-75" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Tambah Data Genre
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Data</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <form method="post">
+                <div class="mb-3">
+                    <label for="namaGenre" class="form-label">Genre Name</label>
+                    <input type="text" class="form-control" name="textName" id="namaGenre" maxlength="45" required autofocus placeholder="Genre Name">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary w-100" name="btnSave">Save Data</button>
+                </div>
+            </form>
+      </div>
     </div>
+  </div>
+</div>
+
     
 </div>
 

@@ -47,3 +47,15 @@ th {
   background-color: red !important;
   padding: 1rem 1.85rem !important;
 }
+
+.darkmode--activated th,
+.darkmode--activated tr,
+.darkmode--activated td,
+.darkmode--activated .darkmode {
+  color: white;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: aqua !important;
+}

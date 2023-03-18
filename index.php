@@ -1,3 +1,12 @@
+<!-- 
+  Aggota Kelompok
+  1. Yehezkiel David Setiawan (2172003) - Membuat halaman cover edit
+  2. Laurentius Gusti Ontoseno Panata Yudha (2172028) -  mengintegrasikan edit cover ketika buku baru ingin mengubah cover dan mendelete cover
+
+  Karena kami telah menyelesaikan cover edit pada akhir kelas, jadi kami hanya menambahkan beberapa syarat yang diperlukan saja.
+
+-->
+
 <?php
   session_start();
   if(!isset($_SESSION['registered_user'])){
@@ -57,7 +66,7 @@
                 <span class="navbar-toggler-icon"></span> 
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto my-auto">
+            <ul class="navbar-nav mx-auto my-auto" style="padding-left:5rem">
               <li class="nav-item">
                 <a class="nav-link" href="?menu=home"><h5>Home</h5></a>
               </li>
@@ -67,10 +76,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="?menu=book"><h5>Book</h5></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link btn btn-danger btn-sm" href="?menu=logout"><h5>Logout</h5></a>
-              </li>
             </ul>
+            <a class="nav-link btn btn-danger btn-lg p-2" href="?menu=logout"><h5 >Logout</h5></a>
           </div>
         </div>
       </nav>
@@ -133,8 +140,30 @@
         $(document).ready(function () {
             $('#book').DataTable();
             $('#genre').DataTable();
-            
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+      function addDarkmodeWidget() {
+        const options = {
+          bottom: '64px', 
+          right: '32px', 
+          left: 'unset', 
+          time: '1s', 
+          mixColor: '#fff', 
+          backgroundColor: '#fff',
+          buttonColorDark: '#100f2c', 
+          buttonColorLight: '#fff', 
+          saveInCookies: false, 
+          label: '⚪', 
+          autoMatchOsTheme: true, 
+        };
+
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+      }
+
+      window.addEventListener('load', addDarkmodeWidget);
+    </script> 
   </body>
 </html>
