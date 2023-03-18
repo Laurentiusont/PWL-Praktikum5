@@ -2,7 +2,10 @@
 $deletecmd = filter_input(INPUT_GET,'comd');
 if(isset($deletecmd) && $deletecmd = 'dele'){
     $ISBNdel = filter_input(INPUT_GET,'idb');
+    $book=fetchOneBook($ISBNdel);
+    unlink('uploads/'.$book['cover']);
     $results =deleteBookFromDb($ISBNdel);
+
     if($results){
         echo '
         <div>
@@ -64,7 +67,13 @@ if(isset($submitPressed)){
                     foreach($result as $book ){
                         echo '<tr>';
                         echo '<td>'. $book['ISBN'] . '</td>';
-                        echo '<td class="py-2 px-2"> <img class="rounded-3" src="uploads/'. $book['cover'] . '.jpg" style="width:100%;height:auto;max-width:500px;max-height:500px;"></td>';
+                        if ($book['cover'] != '') {
+                            echo '<td class="py-2 px-2"> <img class="rounded-3" src="uploads/'.$book['cover'].'" style="width:100%;height:auto;max-width:500px;max-height:500px;"></td>';
+
+                        }
+                        else {
+                            echo '<td class="py-2 px-2"> <img class="rounded-3" src="uploads/default.jpg" style="width:100%;height:auto;max-width:500px;max-height:500px;"></td>';
+                        }
                         echo '<td >'. $book['title'] . '</td>';
                         echo '<td>'. $book['author'] . '</td>';
                         echo '<td>'. $book['publisher'] . '</td>';
