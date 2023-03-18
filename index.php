@@ -1,5 +1,5 @@
 <!-- 
-  Aggota Kelompok
+  Anggota Kelompok
   1. Yehezkiel David Setiawan (2172003) - Membuat halaman cover edit
   2. Laurentius Gusti Ontoseno Panata Yudha (2172028) -  mengintegrasikan edit cover ketika buku baru ingin mengubah cover dan mendelete cover
 
